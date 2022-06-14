@@ -6,15 +6,11 @@ import { fetchUsers } from "./http/userApi"
 const Cards: React.FC = () => {
   const [users, setUsers] = useState()
 
-  const test = async () => {
-    const res = await fetchUsers()
-    setUsers(res.data)
-    console.log({ res })
-  }
-
   useEffect(() => {
-    if (!users) test()
-  })
+    if (!users) async () =>
+    const res = await fetchUsers()
+      setUsers(res.data)
+    })
 
   return <div>sdasd</div>
 }
