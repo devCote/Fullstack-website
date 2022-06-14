@@ -6,15 +6,14 @@ const CustomFormControl = ({ value, validate, isTaken = false, isText, isImage, 
   const checkform = (form: any) => {
     const { errors, touched } = form
     switch (value) {
-      case "name": return { error: errors.name, touched: touched.name }
+      case "firstName": return { error: errors.firstName, touched: touched.firstName }
+      case "lastName": return { error: errors.lastName, touched: touched.lastName }
       case "text": return { error: errors.text, touched: touched.text }
-      case "password": return { error: errors.password, touched: touched.password }
       default: return
     }
   }
 
   const handleChange = (e: any) => {
-    console.log(e.target.files)
     setFile(e.target.files[0])
   }
 

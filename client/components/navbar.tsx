@@ -10,14 +10,13 @@ const Navbar = () => {
           </Text>
         </Box>
         <Flex mt={1}>
-          <Button variant='link' mr={4} color="whiteAlpha.500" fontSize='xl' fontWeight='bold'>
-            Sign in
+          <Button variant='link' onClick={
+            () => {
+              const a = document.getElementsByTagName('input')
+              a[0].focus()
+            }} mr={4} color="whiteAlpha.500" fontSize='xl' fontWeight='bold'>
+            add yourself
           </Button>
-          <Flex justify='center' align='center'>
-            <Button justifySelf='center' variant='link' color="whiteAlpha.500" fontSize='xl' fontWeight='bold'>
-              Log in
-            </Button>
-          </Flex>
         </Flex>
       </Box>
 

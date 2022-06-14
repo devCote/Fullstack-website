@@ -3,7 +3,7 @@ import { AlertStatus, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import CustomFormControl from './form-control';
 import axios from 'axios'
-import AlertPopup from './status';
+import AlertPopup from './popup';
 
 const initialState = {
   isVisible: false,
@@ -28,48 +28,48 @@ const BasicForm = () => {
     <div>
       <AlertPopup alert={alertPopup} setAlert={setAlertPopup} />
       <Formik
-        initialValues={{ name: '', password: '', text: '' }}
+        initialValues={{ name: '', firstName: '', text: '' }}
         onSubmit={(values, actions) => {
           const filetype = file.name.slice(0, file.name.lastIndexOf('.'))
           const name = values.name + '.' + filetype
-          setFile({...file, name })
+          setFile({ ...file, name })
           axios.post('http://localhost:7000/file',
             {
-              user: {values},
+              user: { values },
               file
             }, {
-              headers: {'Content-Type': 'multipart/form-data' }
-            }).then((_res) => {
-        actions.resetForm()
-              setAlertPopup({...initialState, isVisible: true })
-            })
+            headers: { 'Content-Type': 'multipart/form-data' }
+          }).then((_res) => {
+            actions.resetForm()
+            setAlertPopup({ ...initialState, isVisible: true })
+          })
             .catch((e) => {
-        setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
+              setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
               actions.setFieldError('name', e.response.data)
             })
             .finally(() => actions.setSubmitting(false))
-         }}
+        }}
       >
-      {(props) => (
-        <Form style={{ marginTop: '10px' }}>
-          <CustomFormControl value='name' validate={validate} />
-          <CustomFormControl value='password' validate={validate} />
-          <CustomFormControl value='text' isText validate={validate} />
-          <CustomFormControl setFile={setFile} value='image' isImage />
-          <Button
-            mt={4}
-            colorScheme='whiteAlpha'
-            _hover={{ color: "white" }}
-            variant='outline'
-            isLoading={props.isSubmitting}
-            type='submit'
-          >
-            Submit
-          </Button>
-        </Form>
-      )
-      }
-    </Formik>
+        {(props) => (
+          <Form style={{ marginTop: '10px' }}>
+            <CustomFormControl value='firstName' validate={validate} />
+            <CustomFormControl value='lastName' validate={validate} />
+            <CustomFormControl value='text' isText validate={validate} />
+            <CustomFormControl setFile={setFile} value='image' isImage />
+            <Button
+              mt={4}
+              colorScheme='whiteAlpha'
+              _hover={{ color: "white" }}
+              variant='outline'
+              isLoading={props.isSubmitting}
+              type='submit'
+            >
+              Submit
+            </Button>
+          </Form>
+        )
+        }
+      </Formik>
     </div >
   )
 }

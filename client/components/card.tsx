@@ -1,6 +1,5 @@
 import { GridItem, Flex, Avatar, Heading, Text } from "@chakra-ui/react";
-import { Faker } from "./facker"
-
+import { Faker } from "./faker"
 
 const Card: React.FC = () => (
   <GridItem w='300px' h='250px' bg='whiteAlpha.200' display='flex' flexDir='column' p={6}>

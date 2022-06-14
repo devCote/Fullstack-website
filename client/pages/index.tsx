@@ -3,7 +3,6 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/layouts/main'
 import dynamic from 'next/dynamic'
-import Cards from '../components/cards'
 
 const LazyForm: any = dynamic((): any => import('../components/formik'), {
   ssr: false,
@@ -31,7 +30,12 @@ const Home: NextPage = () => {
             modern multicultural metropolis of the 21st-century.
           </Text>
           <Flex mt={2} justify='center'>
-            <Button width='150px' variant='outline' colorScheme='whiteAlpha'>Sign In</Button>
+            <Button width='150px' variant='outline' onClick={
+              () => {
+                const input = document.getElementsByTagName('input')
+                input[0].focus()
+              }
+            } colorScheme='whiteAlpha'>Join Now</Button>
           </Flex>
         </Box>
       </Flex>
@@ -54,7 +58,7 @@ const Home: NextPage = () => {
         <Image src='/pic1.png' alt='img'
           position='absolute' width={{ base: '1000px', md: '1200px', lg: '80%' }}
           zIndex={-1} left={{ base: '10%', lg: '17%' }} bottom='5rm' />
-        <Heading as='h2' fontSize='5xl' color='white'>Register Now</Heading>
+        <Heading as='h2' fontSize='5xl' color='white'>Be The Latest Crawler</Heading>
         <Flex justify='center'>
           <LazyForm />
         </Flex>
