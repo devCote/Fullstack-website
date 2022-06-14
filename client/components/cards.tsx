@@ -2,16 +2,23 @@ import { useEffect, useState } from "react"
 import Card from "./card"
 import { fetchUsers } from "./http/userApi"
 import { Faker } from "./faker"
+import { url } from "./http/axios.config"
 
 const Cards: React.FC = () => {
-  const [users, setUsers]: any = useState([])
+  const [users, setUsers]: any = useState()
 
   const fetch = async () => {
     const res = await fetchUsers()
-    setUsers(res.data)
-    console.log(res)
+    const data = res.data.map((i: any, idx: number, arr: any) => {
+      const image = url + i.image
+      return { ...arr[idx], image }
+    })
+    setUsers(data.reverse())
   }
 
+  const getUser = (id: number) => {
+    return users[id]
+  }
 
   useEffect(() => {
     if (!users) fetch()
@@ -19,12 +26,12 @@ const Cards: React.FC = () => {
 
   return (
     <>
-      <Card key={0} user={users && users.length > 0 ? users[0] : Faker.getUser()} />
-      <Card key={1} user={users && users.length > 1 ? users[1] : Faker.getUser()} />
-      <Card key={2} user={users && users.length > 2 ? users[2] : Faker.getUser()} />
-      <Card key={3} user={users && users.length > 3 ? users[3] : Faker.getUser()} />
-      <Card key={4} user={users && users.length > 4 ? users[4] : Faker.getUser()} />
-      <Card key={5} user={users && users.length > 5 ? users[5] : Faker.getUser()} />
+      <Card key={0} user={users && users.length > 0 ? getUser(0) : Faker.getUser()} />
+      <Card key={1} user={users && users.length > 1 ? getUser(1) : Faker.getUser()} />
+      <Card key={2} user={users && users.length > 2 ? getUser(2) : Faker.getUser()} />
+      <Card key={3} user={users && users.length > 3 ? getUser(3) : Faker.getUser()} />
+      <Card key={4} user={users && users.length > 4 ? getUser(4) : Faker.getUser()} />
+      <Card key={5} user={users && users.length > 5 ? getUser(5) : Faker.getUser()} />
     </>
   )
 }

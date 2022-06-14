@@ -4,11 +4,10 @@ import { Form, Formik } from 'formik';
 import CustomFormControl from './form-control';
 import AlertPopup from './popup';
 import { registration } from './http/userApi';
-import Cards from './cards';
 
 const initialState = {
   isVisible: false,
-  message: 'Your account has been created, you can login now.',
+  message: 'Your card has been created, you can reload the page and see the results.',
   status: 'success' as AlertStatus
 }
 
