@@ -3,14 +3,13 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/layouts/main'
 import dynamic from 'next/dynamic'
-import Cards from '../components/cards'
 
 const LazyForm: any = dynamic((): any => import('../components/formik'), {
   ssr: false,
   loading: () => <div>Loading</div>
 })
 
-const Card: any = dynamic((): any => import('../components/card'), { ssr: false, loading: () => <div>loading</div> })
+const Cards: any = dynamic((): any => import('../components/cards'), { ssr: false, loading: () => <div>loading</div> })
 
 const Home: NextPage = () => {
   return (
