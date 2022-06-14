@@ -19,7 +19,7 @@ class UserController {
     return res.status(200).send('success')
   }
 
-  async getUsers(req, res) {
+  async getUsers(_req, res) {
     const users = await User.findAll()
     const mapedUsers = users.map(user => user.dataValues)
     return res.status(200).send(mapedUsers)
