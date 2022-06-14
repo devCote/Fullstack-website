@@ -1,22 +1,24 @@
+const uuid = require('uuid')
 const { User } = require('../models/index')
+const path = require('path')
 
 class UserController {
 
   async registration(req, res) {
-    // name check
-    const users = await User.findAll({ attributes: ['name'] })
-    const names = users.map((user) => {
-      return user.dataValues.name
-    })
-    if (names.includes(req.body.name)) return res.status(400).send("name is taken")
+    try {
+      const { file } = req.files
+      let fileName = uuid.v4() + ".jpg"
+      file.mv(path.resolve(__dirname, '../static', fileName))
 
-    console.log('****************************************\n\n')
-    console.log(req.body)
-    console.log('****************************************\n\n')
+      console.log(req.body)
 
-    // const reply = await User.create(req.body);
-    // console.log("******\nTABLE auto-generated new user:\n", reply.dataValues);
-    return res.status(200).send('success')
+      const { firstName, lastName, text } = req.body
+      const user = await User.create({ firstName, lastName, text, image: fileName });
+      console.log("*************\nTABLE auto-generated new user:\n", user);
+      return res.status(200).json(user)
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   async getUsers(_req, res) {

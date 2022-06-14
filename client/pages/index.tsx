@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/layouts/main'
 import dynamic from 'next/dynamic'
+import Cards from '../components/cards'
 
 const LazyForm: any = dynamic((): any => import('../components/formik'), {
   ssr: false,
@@ -42,12 +43,7 @@ const Home: NextPage = () => {
       <Grid as='section' height='90vh' display='flex' alignItems='center' justifyContent='center' flexDir='column'>
         <Heading color='white' mb={4} as='h2'>Night City Cravlers</Heading>
         <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Cards />
         </Grid>
       </Grid>
       <Box as='section' height='90vh' display='flex' alignItems='center' justifyContent='center' flexDir='column'>

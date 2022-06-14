@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { AlertStatus, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import CustomFormControl from './form-control';
-import axios from 'axios'
 import AlertPopup from './popup';
+import { registration } from './http/userApi';
+import Cards from './cards';
 
 const initialState = {
   isVisible: false,
@@ -28,26 +29,18 @@ const BasicForm = () => {
     <div>
       <AlertPopup alert={alertPopup} setAlert={setAlertPopup} />
       <Formik
-        initialValues={{ name: '', firstName: '', text: '' }}
-        onSubmit={(values, actions) => {
-          const filetype = file.name.slice(0, file.name.lastIndexOf('.'))
-          const name = values.name + '.' + filetype
-          setFile({ ...file, name })
-          axios.post('http://localhost:7000/file',
-            {
-              user: { values },
-              file
-            }, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-          }).then((_res) => {
+        initialValues={{ firstName: '', lastName: '', text: '' }}
+        onSubmit={async (values: any, actions) => {
+          try {
+            const res = await registration(values, file)
             actions.resetForm()
             setAlertPopup({ ...initialState, isVisible: true })
-          })
-            .catch((e) => {
-              setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
-              actions.setFieldError('name', e.response.data)
-            })
-            .finally(() => actions.setSubmitting(false))
+          } catch (e: any) {
+            setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
+            actions.setFieldError('name', e.response.data)
+          } finally {
+            actions.setSubmitting(false)
+          }
         }}
       >
         {(props) => (
