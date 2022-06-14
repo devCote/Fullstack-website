@@ -2,19 +2,16 @@ import { faker } from '@faker-js/faker'
 
 export class Faker {
 
-  static getAvatar() {
-    return faker.image.avatar()
-  }
-
-  static getFirstName() {
-    return faker.name.firstName()
-  }
-
-  static getLastName() {
-    return faker.name.lastName()
-  }
-
-  static getText() {
-    return faker.image.avatar()
+  static getUser() {
+    const firstName = faker.name.firstName()
+    const lastName = faker.name.lastName()
+    const image = faker.image.avatar()
+    const text = faker.lorem.sentences(3)
+    return {
+      firstName,
+      lastName,
+      image,
+      text
+    }
   }
 }
