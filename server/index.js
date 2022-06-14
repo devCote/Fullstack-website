@@ -13,7 +13,10 @@ app.use(express.json())
 app.use('/api', apiRouter)
 app.use('/server', serverRouter)
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 const start = async () => {
   try {
     await sequelize.authenticate()
