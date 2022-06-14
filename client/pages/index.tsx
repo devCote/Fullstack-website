@@ -2,12 +2,8 @@ import { Box, Heading, Button, Text, Grid, Flex, Image, extendTheme } from '@cha
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/layouts/main'
-import { faker } from '@faker-js/faker'
 import dynamic from 'next/dynamic'
 import Cards from '../components/cards'
-
-
-console.log({extendTheme})
 
 const LazyForm: any = dynamic((): any => import('../components/formik'), {
   ssr: false,
@@ -15,13 +11,6 @@ const LazyForm: any = dynamic((): any => import('../components/formik'), {
 })
 
 const Card: any = dynamic((): any => import('../components/card'), { ssr: false, loading: () => <div>loading</div> })
-
-const fakeData = () => ({
-  avatar: faker.image.avatar(),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-  text: faker.lorem.sentences(3)
-})
 
 const Home: NextPage = () => {
   return (
@@ -49,13 +38,12 @@ const Home: NextPage = () => {
       <Grid as='section' height='90vh' display='flex' alignItems='center' justifyContent='center' flexDir='column'>
         <Heading color='white' mb={4} as='h2'>Night City Cravlers</Heading>
         <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-          <Cards />
-          <Card data={fakeData()} />
-          <Card data={fakeData()} />
-          <Card data={fakeData()} />
-          <Card data={fakeData()} />
-          <Card data={fakeData()} />
-          <Card data={fakeData()} />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </Grid>
       </Grid>
       <Box as='section' height='90vh' display='flex' alignItems='center' justifyContent='center' flexDir='column'>
