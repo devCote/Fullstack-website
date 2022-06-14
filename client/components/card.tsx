@@ -1,6 +1,6 @@
 import { GridItem, Flex, Avatar, Heading, Text } from "@chakra-ui/react";
 
-type Client = {
+interface Client {
   data: {
     avatar: string,
     firstName: string,
@@ -9,7 +9,7 @@ type Client = {
   }
 }
 
-const Card = ({ data: { avatar, firstName, lastName, text } }: Client) => (
+const Card: React.FC<Client> = ({ data: { avatar, firstName, lastName, text } }) => (
   <GridItem w='300px' h='250px' bg='whiteAlpha.200' display='flex' flexDir='column' p={6}>
     <Flex>
       <Avatar mr={4} src={avatar} />
