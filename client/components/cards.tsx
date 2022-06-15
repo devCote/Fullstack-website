@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useContext } from "react"
 import Card from "./card"
 import { Faker } from "./faker"
 import { StoreContext } from "../pages/_app"
+import { observer } from "mobx-react-lite"
 
-const Cards = () => {
+const Cards = observer(() => {
   const store = useContext(StoreContext)
   const { users } = store
 
@@ -12,8 +13,8 @@ const Cards = () => {
   }
 
   useEffect(() => {
-    if (!users) store.fetchUsers()
-  })
+    store.fetchUsers()
+  }, [])
 
   return (
     <>
@@ -25,6 +26,6 @@ const Cards = () => {
       <Card key={5} user={users && users.length > 5 ? getUser(5) : Faker.getUser()} />
     </>
   )
-}
+})
 
 export default Cards
