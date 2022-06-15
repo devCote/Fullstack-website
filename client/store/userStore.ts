@@ -11,11 +11,12 @@ export class Store {
   }
 
   fetchUsersProcessing(users: any) {
-    const data = users.data.map((i: any, idx: number, arr: any) => {
+    const reverseUsers = users.data.reverse()
+    const data = reverseUsers.map((i: any, idx: number, arr: any) => {
       const image = url + i.image
       return { ...arr[idx], image }
     })
-    return data.reverse()
+    return data
   }
 
   fetchUsers() {
