@@ -6,13 +6,14 @@ import '../styles/globals.css';
 import { createContext } from 'react'
 import { Store } from '../store/userStore';
 
+let store: Store;
 
 export const StoreContext = createContext<any>(null)
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <StoreContext.Provider value={new Store}>
+      <StoreContext.Provider value={initializeStore()}>
         <Component {...pageProps} />
       </StoreContext.Provider>
     </ChakraProvider>
@@ -20,3 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+
+function initializeStore(): Store {
+  const _store = store ?? new Store();
+  if (typeof window === "undefined") return _store;
+  if (!store) store = _store;
+  return _store;
+}
