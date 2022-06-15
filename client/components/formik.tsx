@@ -6,7 +6,7 @@ import AlertPopup from './popup';
 import { registration } from './http/userApi';
 import { StoreContext } from '../pages/_app';
 
-const initialState = {
+const defaultAlertState = {
   isVisible: false,
   message: 'Your card has been created, you can reload the page and see the results.',
   status: 'success' as AlertStatus
@@ -15,7 +15,7 @@ const initialState = {
 const BasicForm = () => {
 
   const [file, setFile]: any = useState()
-  const [alertPopup, setAlertPopup] = useState(initialState)
+  const [alertPopup, setAlertPopup] = useState(defaultAlertState)
   const store = useContext(StoreContext)
 
   function validate(value: string) {
@@ -33,9 +33,9 @@ const BasicForm = () => {
         initialValues={{ firstName: '', lastName: '', text: '' }}
         onSubmit={async (values: any, actions) => {
           try {
-            const res = await registration(values, file)
+            registration(values, file)
             actions.resetForm()
-            setAlertPopup({ ...initialState, isVisible: true })
+            setAlertPopup({ ...defaultAlertState, isVisible: true })
             store.fetchUsers()
           } catch (e: any) {
             setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
