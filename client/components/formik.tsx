@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AlertStatus, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import CustomFormControl from './form-control';
 import AlertPopup from './popup';
 import { registration } from './http/userApi';
+import { StoreContext } from '../pages/_app';
 
 const initialState = {
   isVisible: false,
@@ -15,6 +16,7 @@ const BasicForm = () => {
 
   const [file, setFile]: any = useState()
   const [alertPopup, setAlertPopup] = useState(initialState)
+  const store = useContext(StoreContext)
 
   function validate(value: string) {
     if (!value) {
@@ -34,6 +36,7 @@ const BasicForm = () => {
             const res = await registration(values, file)
             actions.resetForm()
             setAlertPopup({ ...initialState, isVisible: true })
+            store.fetchUsers()
           } catch (e: any) {
             setAlertPopup({ isVisible: true, status: 'error', message: e.response.message })
             actions.setFieldError('name', e.response.data)

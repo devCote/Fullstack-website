@@ -1,27 +1,18 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import Card from "./card"
-import { fetchUsers } from "./http/userApi"
 import { Faker } from "./faker"
-import { url } from "./http/axios.config"
+import { StoreContext } from "../pages/_app"
 
-const Cards: React.FC = () => {
-  const [users, setUsers]: any = useState()
-
-  const fetch = async () => {
-    const res = await fetchUsers()
-    const data = res.data.map((i: any, idx: number, arr: any) => {
-      const image = url + i.image
-      return { ...arr[idx], image }
-    })
-    setUsers(data.reverse())
-  }
+const Cards = () => {
+  const store = useContext(StoreContext)
+  const { users } = store
 
   const getUser = (id: number) => {
     return users[id]
   }
 
   useEffect(() => {
-    if (!users) fetch()
+    if (!users) store.fetchUsers()
   })
 
   return (

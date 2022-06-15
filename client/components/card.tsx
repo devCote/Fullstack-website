@@ -11,8 +11,6 @@ type user = {
 
 const Card = ({ user }: user) => {
 
-  console.log({ user })
-
   return (
     <GridItem w='300px' h='250px' bg='whiteAlpha.200' display='flex' flexDir='column' p={6}>
       <Flex>
