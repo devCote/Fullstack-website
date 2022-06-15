@@ -13,6 +13,7 @@ const Navbar = () => {
           <Button variant='link' onClick={
             () => {
               const a = document.getElementsByTagName('input')
+              window.scrollTo(0, document.body.scrollHeight)
               a[0].focus()
             }} mr={4} color="whiteAlpha.500" fontSize='xl' fontWeight='bold'>
             add yourself
