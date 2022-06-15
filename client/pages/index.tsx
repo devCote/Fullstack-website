@@ -34,6 +34,7 @@ const Home: NextPage = () => {
               () => {
                 const input = document.getElementsByTagName('input')
                 input[0].focus()
+                window.scrollTo(0, document.body.scrollHeight)
               }
             } colorScheme='whiteAlpha'>Join Now</Button>
           </Flex>
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
       <Box as='section' height='90vh' display='flex' alignItems='center' justifyContent='center' flexDir='column'>
         <Image src='/night-city-life.jpg' zIndex={-2}
           position='absolute' width='100%' height='90vh'
-          drop-shadow='50px 10px red'
+          objectFit='cover'
           alt='s' filter='auto' blur='3px' brightness='60%' />
         <Image src='/pic1.png' alt='img'
           position='absolute' width={{ base: '1000px', md: '1200px', lg: '80%' }}
