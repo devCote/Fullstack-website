@@ -1,21 +1,32 @@
-import React from 'react';
-import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import theme from '../styles/theme'
-import '../styles/globals.css';
-import { createContext } from 'react'
-import { Store } from '../store/userStore';
+import { GridItem, Flex, Box, Heading, Text, Image } from "@chakra-ui/react";
 
-export const StoreContext = createContext<Store>(null)
-
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ChakraProvider theme={theme}>
-      <StoreContext.Provider value={new Store}>
-        <Component {...pageProps} />
-      </StoreContext.Provider>
-    </ChakraProvider>
-  );
+type user = {
+  user: {
+    firstName: string,
+    lastName: string,
+    image: string,
+    text: string
+  }
 }
 
-export default MyApp;
+const Card = ({ user }: user) => {
+
+  console.log(user.image)
+
+  return (
+    <GridItem w='300px' h='250px' bg='whiteAlpha.200' display='flex' flexDir='column' p={6}>
+      <Flex>
+        <Image borderColor={"whiteAlpha.800"} borderWidth={2} borderStyle='solid' width='70px'
+          height='70px'
+          display="inline-block" borderRadius='100%' alt={user.image} mr={4} src={user.image} />
+        <Heading color='white' alignSelf='center' as='h2' fontSize={20}>
+          {user.firstName + '.' + user.lastName}
+        </Heading>
+      </Flex>
+
+      <Text color='whiteAlpha.700' mt={4}>{user.text}</Text>
+    </GridItem>
+  )
+}
+
+export default Card
