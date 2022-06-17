@@ -11,12 +11,20 @@ export const registration: newCredentials = async (values: any, file: any) => {
   formData.append('text', values.text)
   formData.append('file', file)
 
-  const response = await $host.post('api/user/registration', formData)
+  try {
+    const response = await $host.post('api/user/registration', formData)
+    return response
+  } catch (err: any) {
+    alert(err.message)
+  }
 
-  return response
 }
 
 export const fetchUsers = async () => {
-  const response = await $host.get('api/user/getusers')
-  return response
+  try {
+    const response = await $host.get('api/user/getusers')
+    return response
+  } catch (err: any) {
+    alert(err.message)
+  }
 }

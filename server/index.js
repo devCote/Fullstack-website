@@ -4,7 +4,6 @@ const sequelize = require('./db')
 const cors = require('cors')
 const { apiRouter, serverRouter } = require('./routes/index')
 const fileUpload = require('express-fileupload')
-const fs = require('fs')
 const path = require('path')
 
 const PORT = process.env.PORT || 5000
